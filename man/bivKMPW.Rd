@@ -1,8 +1,8 @@
-\name{bivCKM}
-\alias{bivCKM}
-\title{Conditional Kaplan-Meier Estimator}
-\description{Provides estimates for the bivariate distribution function for the Conditional Kaplan-Meier estimator, CKM.}
-\usage{bivCKM(object, t1, t2, conf=FALSE, n.boot=1000, conf.level=0.95,
+\name{bivKMPW}
+\alias{bivKMPW}
+\title{Kaplan-Meier Presmoothed Weighted Estimator}
+\description{Provides estimates for the bivariate distribution function for the estimator based on Kaplan-Meier Weights: Kaplan-Meier Presmoothed Weighted Estimator, KMPW.}
+\usage{bivKMPW(object, t1, t2, conf=FALSE, n.boot=1000, conf.level=0.95,
 method.boot="percentile")}
 
 \arguments{
@@ -11,8 +11,8 @@ method.boot="percentile")}
 \item{t2}{the second time for obtaining estimates for the bivariate distribution function. If missing, the maximum of \code{time2} will be used.}
 \item{conf}{provides pointwise confidence bands. Defaults to \code{FALSE}.}
 \item{n.boot}{the number of bootstrap samples. Defaults to 1000 samples.}
-\item{conf.level}{level of confidence. Defaults to 0.95 (correponding to 95\%).}
 \item{method.boot}{method used to compute bootstrap confidence intervals. Possible options are "percentile" and "basic". Defaults to "percentile".}
+\item{conf.level}{level of confidence. Defaults to 0.95 (correponding to 95\%).}
 }
 
 %\details{
@@ -29,9 +29,7 @@ method.boot="percentile")}
 
 \references{
 %% ~put references to the literature/web site here ~
-de Una-Alvarez J, Meira Machado LF (2008). "A Simple Estimator of the Bivariate Distribution Function for Censored Gap Times", \emph{Statistical and Probability Letters}, \bold{78}, 2440-2445.
-
-Meira Machado LF, Moreira A (2010). "Estimation of the Bivariate Distribution Function for Censored Gap Times", \emph{Proceedings of the 19th International Conference on Computational Statistics}, pp. 1367-1374.
+de Una-Alvarez J, Amorim AP (2011). "A Semiparametric Estimator of the Bivariate Distribution Function for Censored Gap Times", \emph{Biometrical Journal}, \bold{53}, 113-127.
 
 Davison, A.C. and Hinkley, D.V. (1997) "Bootstrap Methods and Their Application", Chapter 5. Cambridge University Press.
 }
@@ -45,17 +43,17 @@ Davison, A.C. and Hinkley, D.V. (1997) "Bootstrap Methods and Their Application"
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
+\code{\link{bivCKM}},
 \code{\link{bivIPCW}},
-\code{\link{bivKMPW}},
 \code{\link{bivKMW}}.
 }
 
 \examples{
 data(bladderBIV)
 bladderBIV.obj <- with( bladderBIV, survBIV(time1, event1, time2, event2) )
-bivCKM(object=bladderBIV.obj, t1=5, t2=20)
+bivKMPW(object=bladderBIV.obj, t1=5, t2=20)
 #or
 bladderBIV.obj <- survBIV(bladderBIV$time1, bladderBIV$event1, bladderBIV$time2,
 bladderBIV$event2)
-bivCKM(object=bladderBIV.obj, t1=5, t2=20, conf=TRUE, conf.level=0.9)
+bivKMPW(object=bladderBIV.obj, t1=5, t2=20, conf=TRUE, conf.level=0.9)
 }

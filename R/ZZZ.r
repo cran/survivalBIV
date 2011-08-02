@@ -1,2 +1,3 @@
-.First.lib<-function (lib,pkg){require(mgcv)}
-
+.onUnload <- function(libpath) {
+	library.dynam.unload("survivalBIV", libpath)
+}

@@ -1,15 +1,17 @@
 Package: survivalBIV
 Type: Package
-Depends: R (>= 2.11.1),mgcv,survival,base
-Title: Estimation of the Bivariate Distribution Function
-Version: 1.0
-Date: 2011-01-18
-Author: Ana Moreira and Luis Meira-Machado <lmachado@math.uminho.pt>
+Depends: R (>= 2.13.0),graphics,prodlim,stats
+Title: Estimation of the bivariate distribution function
+Version: 1.1
+Date: 2011-08-02
+Author: Ana Moreira, Artur Agostinho Araujo <b5492@math.uminho.pt> and
+        Luis Meira-Machado <lmachado@math.uminho.pt>
 Maintainer: Ana Moreira <id2809@alunos.uminho.pt>
-Description: Estimation of the Bivariate Distribution Function for
-        Sequentially Ordered Events Under Univariate Censoring
+Description: Estimation of the bivariate distribution function for
+        sequentially ordered events under univariate censoring
 License: GPL
 LazyLoad: yes
-Packaged: 2011-01-24 18:06:34 UTC; Ana Moreira
+LazyData: yes
+Packaged: 2011-08-06 12:12:30 UTC; User
 Repository: CRAN
-Date/Publication: 2011-01-25 16:56:32
+Date/Publication: 2011-08-08 13:25:26

@@ -1,16 +1,25 @@
-`bivKMW`<-function(mydata,t1,t2) 
-{ 
-if(missing(mydata)) stop("Argument 'mydata' is missing with no default")
-if(class(mydata)!="bivariate") stop("Argument 'mydata' must be class 'bivariate'")
-mydata<-mydata[[1]]
-if(missing(t1)) t1=0
-if(missing(t2)) t2=max(mydata[,3])
-if(t1<0|t2<0) stop("'t1' and 't2' must be positive")
-p<-which(mydata[,1]<=t1 & mydata[,3]<=t2)
-res1<-sum(mydata[p,11]) 
-res2<-sum(mydata[p,12]) 
-res3<-sum(mydata[p,13]) 
-dados<-cbind(KMW=res1,KMPW_glm=res2,KMPW_gam=res3)
-return(dados)
+bivKMW <- function(object, t1, t2, conf=FALSE, n.boot=1000, conf.level=0.95, method.boot="percentile") {
+	if ( missing(object) ) stop("Argument 'object' is missing, with no default")
+	if ( missing(t1) ) t1 <- 0
+	if (t1 == Inf) t1 <- max(object$data$time1)
+	if ( missing(t2) ) t2 <- max(object$data$time2)
+	Message <- BivCheck(object, t1, t2, conf, n.boot, conf.level, method.boot)
+	if ( !is.null(Message) ) stop(Message)
+	rm(Message)
+	n.boot <- as.integer(n.boot)
+	return( BivMethod(object, t1, t2, conf, n.boot, conf.level, method.boot, "KMW") )
 }
 
+Biv.KMW <- function(object) {
+	x <- with( object, list("data"=data[,c("time1", "time2", "event2", "Stime")]) )
+	class(x) <- "KMW"
+	return(x)
+}
+
+BivSort.KMW <- function(object) {
+	with( object$data, .C("BivSortKMW", time1, time2, event2, Stime, as.integer( nrow(object$data) ), DUP=FALSE) )
+}
+
+BivDist.KMW <- function(object, t1, t2) {
+	return( with(object$data, .C("BivDistKMW", time1, time2, event2, as.integer( nrow(object$data) ), as.double(t1), as.double(t2), p = as.double(1), DUP=FALSE)$p) )
+}

@@ -1,51 +1,25 @@
-`bivCKM`<-function(mydata,t1,t2) 
-{
-if(missing(mydata)) stop("Argument 'mydata' is missing with no default")
-if(class(mydata)!="bivariate") stop("Argument 'mydata' must be class 'bivariate'")
-mydata<-mydata[[1]]
-times1<-mydata[,1]
-delta<-mydata[,2]
-times2<-mydata[,3]
-status<-mydata[,4]
-if(missing(t1)) t1=0
-if(missing(t2)) t2=max(times2)
-if(t1<0|t2<0) stop("'t1' and 't2' must be positive")
-ooo<-order(times1)
-times1<-times1[ooo]
-delta<-delta[ooo]
-times2<-times2[ooo] 
-status<-status[ooo]
-s0<-1
-unique.t0<-unique(times1)
-unique.t0<-unique.t0[order(unique.t0)]
-n.times<-sum(unique.t0<=t1)
-for(j in 1:n.times) 
-{
-  n<-sum(times1>=unique.t0[j])
-  d<-sum((times1==unique.t0[j])&(delta==1))
-  if(n>0) {s0<-s0*(1-d/n)}
-}
-s.pooled<-s0
-s0<-1
-subset<-as.logical(times1<=t1)
-t0<-times2[subset]
-c0<-status[subset]
-if(!is.null(t0)) 
-{
-  unique.t0<-unique(t0)
-  unique.t0<-unique.t0[order(unique.t0)]
-  n.times<-sum(unique.t0<=t2)
-  if(n.times>0) 
-  {
-    for(j in 1:n.times) 
-    {
-      n<-sum(t0>=unique.t0[j])
-      d<-sum((t0==unique.t0[j])&(c0==1))
-      if(n > 0) s0<-s0*(1-d/n) 
-    }
-  }
-}
-res<-(1-s.pooled)*(1-s0) 
-return(res)
+bivCKM <- function(object, t1, t2, conf=FALSE, n.boot=1000, conf.level=0.95, method.boot="percentile") {
+	if ( missing(object) ) stop("Argument 'object' is missing, with no default")
+	if ( missing(t1) ) t1 <- 0
+	if (t1 == Inf) t1 <- max(object$data$time1)
+	if ( missing(t2) ) t2 <- max(object$data$time2)
+	Message <- BivCheck(object, t1, t2, conf, n.boot, conf.level, method.boot)
+	if ( !is.null(Message) ) stop(Message)
+	rm(Message)
+	n.boot <- as.integer(n.boot)
+	return( BivMethod(object, t1, t2, conf, n.boot, conf.level, method.boot, "CKM") )
 }
 
+Biv.CKM <- function(object) {
+	x <- with( object, list("data"=data[,c("time1", "event1", "time2", "event2")]) )
+	class(x) <- "CKM"
+	return(x)
+}
+
+BivSort.CKM <- function(object) {
+	with( object$data, .C("BivSortCKM", time1, event1, time2, event2, as.integer( nrow(object$data) ), DUP=FALSE) )
+}
+
+BivDist.CKM<- function(object, t1, t2) {
+	return( with(object$data, .C("BivDistCKM", time1, event1, time2, event2, as.integer( nrow(object$data) ), as.double(t1), as.double(t2), p = as.double(1), DUP=FALSE)$p) )
+}
