@@ -3,7 +3,7 @@
 \docType{data}
 \title{Bladder cancer recurrences}
 \description{This contains the bladder cancer recurrences data in a different format. In this study, patients had superficial bladder tumors that were removed by transurethral resection. Many patients had multiple recurrences (up to a maximum of 9) of tumors during the study, and new tumors were removed at each visit. Only the first two recurrence times (in months) and the corresponding gap times are considered.}
-\usage{data(bladderBIV)}
+\usage{data("bladderBIV")}
 
 \format{
 A data frame with 85 observations on the following 4 variables.

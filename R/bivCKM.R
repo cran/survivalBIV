@@ -17,9 +17,9 @@ Biv.CKM <- function(object) {
 }
 
 BivSort.CKM <- function(object) {
-	with( object$data, .C("BivSortCKM", time1, event1, time2, event2, as.integer( nrow(object$data) ), DUP=FALSE) )
+	with( object$data, .C("BivSortCKM", time1, event1, time2, event2, as.integer( nrow(object$data) ), DUP=FALSE, PACKAGE="survivalBIV") )
 }
 
 BivDist.CKM<- function(object, t1, t2) {
-	return( with(object$data, .C("BivDistCKM", time1, event1, time2, event2, as.integer( nrow(object$data) ), as.double(t1), as.double(t2), p = as.double(1), DUP=FALSE)$p) )
+	return( with(object$data, .C("BivDistCKM", time1, event1, time2, event2, as.integer( nrow(object$data) ), as.double(t1), as.double(t2), p = as.double(1), DUP=FALSE, PACKAGE="survivalBIV")$p) )
 }

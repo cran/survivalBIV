@@ -2,8 +2,8 @@
 \alias{bivIPCW}
 \title{Inverse Probability of Censoring Weighted Estimator}
 \description{Provides estimates for the bivariate distribution function for the Inverse Probability of Censoring Weighted estimator, IPCW.}
-\usage{bivIPCW(object, t1, t2, conf=FALSE, n.boot=1000, conf.level=0.95,
-method.boot="percentile", method.cens="KM")}
+\usage{bivIPCW(object, t1, t2, conf = FALSE, n.boot = 1000, conf.level = 0.95,
+method.boot = "percentile", method.cens = "KM")}
 
 \arguments{
 \item{object}{an object of class \code{survBIV}.}
@@ -52,12 +52,12 @@ Davison, A.C. and Hinkley, D.V. (1997) "Bootstrap Methods and Their Application"
 }
 
 \examples{
-data(bladderBIV)
-bladderBIV.obj <- with( bladderBIV, survBIV(time1, event1, time2, event2) )
-bivIPCW(object=bladderBIV.obj, t1=5, t2=20, method.cens="prodlim")
+data("bladderBIV")
+bladderBIV_obj <- with(bladderBIV, survBIV(time1, event1, time2, event2))
+bivIPCW(object = bladderBIV_obj, t1 = 5, t2 = 20, method.cens = "prodlim")
 #or
-bladderBIV.obj <- survBIV(bladderBIV$time1, bladderBIV$event1, bladderBIV$time2,
+bladderBIV_obj <- survBIV(bladderBIV$time1, bladderBIV$event1, bladderBIV$time2,
 bladderBIV$event2)
-bivIPCW(object=bladderBIV.obj, t1=5, t2=20, conf=TRUE, conf.level=0.9,
-method.boot="basic")
+bivIPCW(object = bladderBIV_obj, t1 = 5, t2 = 20, conf = TRUE, conf.level = 0.9,
+method.boot = "basic")
 }

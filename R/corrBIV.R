@@ -1,4 +1,4 @@
-corr.BIV <- function(dist, corr, dist.par) {
+corrBIV <- function(dist, corr, dist.par) {
 	if ( missing(dist) ) stop("Argument 'dist' is missing, with no default")
 	if ( missing(corr) ) stop("Argument 'corr' is missing, with no default")
 	if ( missing(dist.par) ) stop("Argument 'dist.par' is missing, with no default")

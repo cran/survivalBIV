@@ -20,30 +20,28 @@ Biv.IPCW1 <- function(object) {
 }
 
 Biv.IPCW2 <- function(object) {
-	x <- with( object, list("data"=data) )
+	require(prodlim)
+	surv <- as.double( with( object$data, predict(prodlim(Hist(time1, event1)~1, reverse=TRUE, conf.int=FALSE), times=time1, type="surv") ) )
+	surv[is.na(surv)] <- 0
+	survS <- as.double( with( object$data, predict(prodlim(Hist(Stime, event2)~1, reverse=TRUE, conf.int=FALSE), times=Stime, type="surv") ) )
+	survS[is.na(survS)] <- 0
+	x <- with( object$data, list( "data"=data.frame("time1"=time1, "surv"=surv, "time2"=time2, "Stime"=Stime, "survS"=survS) ) )
 	class(x) <- c("IPCW", "IPCW2")
 	return(x)
 }
 
-BivSort.IPCW <- function(object) {
-	with( object$data, .C("BivSortIPCW", time1, event1, time2, event2, Stime, as.integer( nrow(object$data) ), DUP=FALSE) )
+BivSort.IPCW1 <- function(object) {
+	with( object$data, .C("BivSortIPCW1", time1, event1, time2, event2, Stime, as.integer( nrow(object$data) ), DUP=FALSE, PACKAGE="survivalBIV") )
+}
+
+BivSort.IPCW2 <- function(object) {
+	with( object$data, .C("BivSortIPCW2", time1, time2, Stime, as.integer( nrow(object$data) ), DUP=FALSE, PACKAGE="survivalBIV") )
 }
 
 BivDist.IPCW1 <- function(object, t1, t2) {
-	return( with(object$data, .C("BivDistIPCW1", time1, event1, time2, event2, Stime, as.integer( nrow(object$data) ), as.double(t1), as.double(t2), p = as.double(0), DUP=FALSE)$p) )
+	return( with(object$data, .C("BivDistIPCW1", time1, event1, time2, event2, Stime, as.integer( nrow(object$data) ), as.double(t1), as.double(t2), p = as.double(0), DUP=FALSE, PACKAGE="survivalBIV")$p) )
 }
 
 BivDist.IPCW2 <- function(object, t1, t2) {
-	end <- trunc(nrow(object$data)/2)
-	if (object$data$time1[end] > t1) end <- 1
-	for ( end in end:nrow(object$data) ) {
-		if (object$data$time1[end] > t1) break
-	}
-	end <- end-1
-	require(prodlim)
-	surv <- as.double( with( object$data, predict(prodlim(Hist(time1, event1)~1, reverse=TRUE), times=time1[1:end]) ) )
-	surv[is.na(surv)] <- 0
-	survS <- as.double( with( object$data, predict(prodlim(Hist(Stime, event2)~1, reverse=TRUE), times=time1[1:end]+t2) ) )
-	survS[is.na(survS)] <- 0
-	return( with(object, .C("BivDistIPCW2", data$time2, surv, survS, as.integer( nrow(data) ), as.integer(end), as.double(t2), p = as.double(0), DUP=FALSE)$p) )
+	return( with(object$data, .C("BivDistIPCW2", time1, surv, time2, Stime, survS, as.integer( nrow(object$data) ), as.double(t1), as.double(t2), p = as.double(0), DUP=FALSE, PACKAGE="survivalBIV")$p) )
 }

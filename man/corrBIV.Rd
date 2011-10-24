@@ -1,8 +1,8 @@
-\name{corr.BIV}
-\alias{corr.BIV}
+\name{corrBIV}
+\alias{corrBIV}
 \title{Correlation between two gap times}
 \description{Provides the correlation between the bivariate times for some copula distributions.}
-\usage{corr.BIV(dist, corr, dist.par)}
+\usage{corrBIV(dist, corr, dist.par)}
 
 \arguments{
 \item{dist}{the distribution. Possible bivariate distributions are "exponential" and "weibull".}
@@ -44,12 +44,12 @@ Lu J, Bhattacharya G (1990). "Some new constructions of bivariate weibull models
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{data.gen.BIV}}.
+\code{\link{dgpBIV}}.
 }
 
 \examples{
 #Example for the bivariate Weibull distribution
-corr.BIV( dist="weibull", corr=0.5, dist.par=c(2,7,2,7) )
+corrBIV(dist = "weibull", corr = 0.5, dist.par = c(2, 7, 2, 7))
 #Example for the bivariate Exponential distribution
-corr.BIV( dist="exponential", corr=1, dist.par=c(1,1) )
+corrBIV(dist = "exponential", corr = 1, dist.par = c(1, 1))
 }

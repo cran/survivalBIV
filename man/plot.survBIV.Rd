@@ -2,9 +2,10 @@
 \alias{plot.survBIV}
 \title{Plot methods for a survBIV object}
 \description{Provides the plots for the bivariate distribution function and marginal distribution of the second time.}
-\usage{plot.survBIV(x, plot.marginal=FALSE, plot.bivariate=FALSE, plot.persp=FALSE,
-plot.contour=FALSE, method, method.cens="KM", xlab, ylab, zlab, main=method,
-col, grid.x=NULL, grid.y=NULL, col.biv=FALSE, xlim=NULL, ylim=NULL, ...)}
+\usage{plot.survBIV(x, plot.marginal = FALSE, plot.bivariate = FALSE, 
+plot.persp = FALSE, plot.contour = FALSE, method, method.cens = "KM", xlab,
+ylab, zlab, main = method, col, grid.x = NULL, grid.y = NULL, col.biv = FALSE,
+xlim = NULL, ylim = NULL, ...)}
 
 \arguments{
 \item{x}{an object of class \code{survBIV}.}
@@ -56,18 +57,18 @@ col, grid.x=NULL, grid.y=NULL, col.biv=FALSE, xlim=NULL, ylim=NULL, ...)}
 }
 
 \examples{
-data(bladderBIV)
-bladderBIV.obj <- with( bladderBIV, survBIV(time1, event1, time2, event2) )
+data("bladderBIV")
+bladderBIV_obj <- with(bladderBIV, survBIV(time1, event1, time2, event2))
 
-op <- par( mfrow=c(2, 2) )
-plot(bladderBIV.obj, plot.marginal=TRUE, method="CKM")
-plot(bladderBIV.obj, plot.marginal=TRUE, method="IPCW")
-plot(bladderBIV.obj, plot.marginal=TRUE, method="KMPW")
-plot(bladderBIV.obj, plot.marginal=TRUE, method="KMW")
+op <- par(mfrow = c(2, 2))
+plot(bladderBIV_obj, plot.marginal = TRUE, method = "CKM")
+plot(bladderBIV_obj, plot.marginal = TRUE, method = "IPCW")
+plot(bladderBIV_obj, plot.marginal = TRUE, method = "KMPW")
+plot(bladderBIV_obj, plot.marginal = TRUE, method = "KMW")
 par(op)
 
-plot(bladderBIV.obj, plot.marginal=TRUE, plot.bivariate=TRUE, method="CKM")
-plot(bladderBIV.obj, plot.bivariate=TRUE, method="IPCW")
-plot(bladderBIV.obj, plot.persp=TRUE, method="KMPW")
-plot(bladderBIV.obj, plot.contour=TRUE, method="KMW")
+plot(bladderBIV_obj, plot.marginal = TRUE, plot.bivariate = TRUE, method = "CKM")
+plot(bladderBIV_obj, plot.bivariate = TRUE, method = "IPCW")
+plot(bladderBIV_obj, plot.persp = TRUE, method = "KMPW")
+plot(bladderBIV_obj, plot.contour = TRUE, method = "KMW")
 }

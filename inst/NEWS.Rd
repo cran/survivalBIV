@@ -2,6 +2,19 @@
 
 \title{NEWS file for the surivalBIV package}
 
+\section{Changes in version 1.2}{
+	\itemize{
+		\item Implemented efficient algorithms for the computation of probability
+		matrices to be used internally in the 'plot.survBIV' function.
+
+		\item Fixed IPCW algorithm returning wrong results when using 'prodlim' package.
+		
+		\item Renamed corr.BIV function to corrBIV.
+		
+		\item Renamed data.gen.BIV function to dgpBIV.
+	}
+}
+
 \section{Changes in version 1.1}{
 	\itemize{
 		\item Rewritten part of the original code in C, resulting in significant

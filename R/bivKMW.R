@@ -17,9 +17,9 @@ Biv.KMW <- function(object) {
 }
 
 BivSort.KMW <- function(object) {
-	with( object$data, .C("BivSortKMW", time1, time2, event2, Stime, as.integer( nrow(object$data) ), DUP=FALSE) )
+	with( object$data, .C("BivSortKMW", time1, time2, event2, Stime, as.integer( nrow(object$data) ), DUP=FALSE, PACKAGE="survivalBIV") )
 }
 
 BivDist.KMW <- function(object, t1, t2) {
-	return( with(object$data, .C("BivDistKMW", time1, time2, event2, as.integer( nrow(object$data) ), as.double(t1), as.double(t2), p = as.double(1), DUP=FALSE)$p) )
+	return( with(object$data, .C("BivDistKMW", time1, time2, event2, as.integer( nrow(object$data) ), as.double(t1), as.double(t2), p = as.double(0), DUP=FALSE, PACKAGE="survivalBIV")$p) )
 }

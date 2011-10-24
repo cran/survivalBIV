@@ -1,4 +1,4 @@
-data.gen.BIV <- function(n, corr, dist, model.cens, cens.par, dist.par, to.data.frame=FALSE) {
+dgpBIV <- function(n, corr, dist, model.cens, cens.par, dist.par, to.data.frame=FALSE) {
 	if ( missing(n) ) stop("Argument 'n' is missing, with no default")
 	if ( missing(corr) ) stop("Argument 'corr' is missing, with no default")
 	if ( missing(dist) ) stop("Argument 'dist' is missing, with no default")

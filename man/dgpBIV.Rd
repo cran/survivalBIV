@@ -1,9 +1,9 @@
-\name{data.gen.BIV}
-\alias{data.gen.BIV}
+\name{dgpBIV}
+\alias{dgpBIV}
 \title{Generates Bivariate Survival Data}
 \description{Generates bivariate censored gap times from some known copula functions.}
-\usage{data.gen.BIV(n, corr, dist, model.cens, cens.par, dist.par,
-to.data.frame=FALSE)}
+\usage{dgpBIV(n, corr, dist, model.cens, cens.par, dist.par,
+to.data.frame = FALSE)}
 
 \arguments{
 \item{n}{sample size.}
@@ -49,14 +49,14 @@ Lu J, Bhattacharya G (1990). "Some new constructions of bivariate weibull models
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{corr.BIV}}.
+\code{\link{corrBIV}}.
 }
 
 \examples{
 #Example for the bivariate Exponential distribution
-data.gen.BIV( n=100, corr=1, dist="exponential", model.cens="uniform", cens.par=3,
-dist.par=c(1,1), to.data.frame=TRUE )
+dgpBIV(n = 100, corr = 1, dist = "exponential", model.cens = "uniform", 
+cens.par = 3, dist.par = c(1, 1), to.data.frame = TRUE)
 #Example for the bivariate Weibull distribution
-data.gen.BIV( n=100, corr=1, dist="weibull", model.cens="exponential", cens.par=0.08,
-dist.par=c(2,7,2,7) )
+dgpBIV(n = 100, corr = 1, dist = "weibull", model.cens = "exponential",
+cens.par = 0.08, dist.par = c(2, 7, 2, 7))
 }

@@ -10,25 +10,24 @@ bivKMPW <- function(object, t1, t2, conf=FALSE, n.boot=1000, conf.level=0.95, me
 	return( BivMethod(object, t1, t2, conf, n.boot, conf.level, method.boot, "KMPW") )
 }
 
-Biv.KMPW <- function(object) {
-	x <- with( object, list( "data"=cbind( data, "m"=double( nrow(data) ) ) ) )
-	class(x) <- "KMPW"
-	return(x)
-}
-
 BivLogit <- function(object) {
 	require(stats)
 	m <- rep( 0, nrow(object$data) )
 	w <- which(object$data$event1 == 1)
 	m[w] <- predict.glm( glm(formula = event2~time1+time2, family = binomial(link = "logit"), data=object$data[w,]), type="response" )
-	.C("doubleCopy", m, object$data$m, as.integer( nrow(object$data) ), DUP=FALSE)
+	return( as.double(m) )
+}
+
+Biv.KMPW <- function(object) {
+	x <- with( object$data, list( "data"=data.frame("time1"=time1, "time2"=time2, "m"=BivLogit(object), "Stime"=Stime) ) )
+	class(x) <- "KMPW"
+	return(x)
 }
 
 BivSort.KMPW <- function(object) {
-	BivLogit(object)
-	with( object$data, .C("BivSortKMPW", time1, time2, m, Stime, as.integer( nrow(object$data) ), DUP=FALSE) )
+	with( object$data, .C("BivSortKMPW", time1, time2, m, Stime, as.integer( nrow(object$data) ), DUP=FALSE, PACKAGE="survivalBIV") )
 }
 
 BivDist.KMPW <- function(object, t1, t2) {
-	return( with(object$data, .C("BivDistKMPW", time1, time2, m, as.integer( nrow(object$data) ), as.double(t1), as.double(t2), p = as.double(1), DUP=FALSE)$p) )
+	return( with(object$data, .C("BivDistKMPW", time1, time2, m, as.integer( nrow(object$data) ), as.double(t1), as.double(t2), p = as.double(0), DUP=FALSE, PACKAGE="survivalBIV")$p) )
 }

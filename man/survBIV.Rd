@@ -38,9 +38,9 @@ inherits from class \code{survBIV}, otherwise \code{FALSE}.
 }
 
 \examples{
-data(bladderBIV)
-bladderBIV.obj <- with( bladderBIV, survBIV(time1, event1, time2, event2) )
+data("bladderBIV")
+bladderBIV_obj <- with(bladderBIV, survBIV(time1, event1, time2, event2))
 #or
-bladderBIV.obj <- survBIV(bladderBIV$time1, bladderBIV$event1, bladderBIV$time2,
+bladderBIV_obj <- survBIV(bladderBIV$time1, bladderBIV$event1, bladderBIV$time2,
 bladderBIV$event2)
 }

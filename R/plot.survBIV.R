@@ -22,22 +22,16 @@ plot.survBIV <- function(x, plot.marginal=FALSE, plot.bivariate=FALSE, plot.pers
 	if (plot.marginal) {
 		if (xlab.aux == TRUE) xlab <- "Time"
 		if (ylab.aux == TRUE) ylab <- "Estimated marginal dist. F2(t)"
-		len <- as.integer( nrow(object$data) )
 		if ( inherits(object, "IPCW") ) {
-			times <- with( object$data, c( outer(X=unique(time1), Y=unique(Stime[event2 == 0]), FUN="-") ) )
+			times <- with( x$data, c( outer(X=unique(time1), Y=unique(Stime[event2 == 0]), FUN="-") ) )
 			times <- as.double( unique( sort(times[times >= 0]) ) )
-			j <- as.integer( length(times) )
-			probs <- vector(mode="double", length=j)
-		} else {
-			times <- vector(mode="double", length=len)
-			probs <- vector(mode="double", length=len)
-			j <- as.integer(0)
-		}
-		BivMarginal(object, len, times, probs, j)
+		} else times <- vector( mode="double", length=nrow(object$data) )
+		n <- as.integer( length(times) )
+		probs <- BivMarginal(object, times, n)
 		oask <- devAskNewPage(TRUE)
 		on.exit( devAskNewPage(oask) )
-		matplot(times[1:j], probs[1:j], xlab=xlab, ylab=ylab, type="s", main=main, xlim=xlim, ylim=ylim, ...)
-		rm(len, times, probs, j)
+		matplot(times[1:n], probs[1:n], xlab=xlab, ylab=ylab, type="s", main=main, xlim=xlim, ylim=ylim, ...)
+		rm(times, probs, n)
 		oask <- devAskNewPage(TRUE)
 		on.exit( devAskNewPage(oask) )
 	}
@@ -50,19 +44,15 @@ plot.survBIV <- function(x, plot.marginal=FALSE, plot.bivariate=FALSE, plot.pers
 		if (ylab.aux == TRUE) ylab <- "Time in state 2"
 		if ( missing(zlab) ) zlab <- "F(t1,t2)"
 		if ( missing(col) ) col <- "lightblue"
-		if ( is.null(grid.x) ) grid.x <- unique( sort( c(0, object$data$time1) ) )
+		if ( is.null(grid.x) ) grid.x <- as.double( unique( sort( c(0, object$data$time1) ) ) )
+		else grid.x <- as.double(grid.x)
 		if ( is.null(grid.y) ) {
 			if ( inherits(object, "IPCW") ) {
-				grid.y <- with( object$data, c( outer(X=grid.x, Y=unique(Stime[event2 == 0]), FUN="-") ) )
-				grid.y <- unique( sort(grid.y[grid.y >= 0]) )
-			} else grid.y <- unique( sort( c(0, object$data$time2) ) )
-		}
-		z <- matrix( data=0, nrow=length(grid.x), ncol=length(grid.y) )
-		for ( i in 1:length(grid.x) ) {
-			for( j in 1:length(grid.y) ) {
-				z[i,j] <- BivDist(object, t1=grid.x[i], t2=grid.y[j])
-			}
-		}
+				grid.y <- with( x$data, c( outer(X=grid.x, Y=unique(Stime[event2 == 0]), FUN="-") ) )
+				grid.y <- as.double( unique( sort(grid.y[grid.y >= 0]) ) )
+			} else grid.y <- as.double( unique( sort( c(0, object$data$time2) ) ) )
+		} else grid.y <- as.double(grid.y)
+		z <- BivMatrix(object, grid.x, grid.y)
 		oask <- devAskNewPage(TRUE)
 		on.exit( devAskNewPage(oask) )
 		if (plot.persp) {
@@ -81,29 +71,4 @@ plot.survBIV <- function(x, plot.marginal=FALSE, plot.bivariate=FALSE, plot.pers
 			on.exit( devAskNewPage(oask) )
 		}
 	}
-}
-
-BivMarginal.CKM <- function(object, len, times, probs, j) {
-	with( object$data, .C("BivMarginalCKM", time1, event1, time2, event2, len, times, probs, j, DUP=FALSE) )
-}
-
-BivMarginal.IPCW1 <- function(object, len, times, probs, j) {
-	with( object$data, .C("BivMarginalIPCW1", time1, event1, time2, event2, Stime, len, times, probs, j, DUP=FALSE) )
-}
-
-BivMarginal.IPCW2 <- function(object, len, times, probs, j) {
-	require(prodlim)
-	surv <- as.double( with( object$data, predict(prodlim(Hist(time1, event1)~1, reverse=TRUE), times=time1) ) )
-	surv[is.na(surv)] <- 0
-	survS <- as.double( with( object$data, predict(prodlim(Hist(Stime, event2)~1, reverse=TRUE), times=Stime) ) )
-	survS[is.na(survS)] <- 0
-	with( object$data, .C("BivMarginalIPCW2", time1, surv, time2, Stime, survS, len, times, probs, j, DUP=FALSE) )
-}
-
-BivMarginal.KMPW <- function(object, len, times, probs, j) {
-	with( object$data, .C("BivMarginalKMPW", time2, m, len, times, probs, j, DUP=FALSE) )
-}
-
-BivMarginal.KMW <- function(object, len, times, probs, j) {
-	with( object$data, .C("BivMarginalKMW", time2, event2, len, times, probs, j, DUP=FALSE) )
 }

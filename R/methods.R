@@ -10,6 +10,10 @@ BivDist <- function(object, t1, t2) {
 	UseMethod("BivDist")
 }
 
-BivMarginal <- function(object, len, times, probs, j) {
+BivMarginal <- function(object, times, n) {
 	UseMethod("BivMarginal")
+}
+
+BivMatrix <- function(object, grid.x, grid.y) {
+	UseMethod("BivMatrix")
 }
