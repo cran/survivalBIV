@@ -2,7 +2,8 @@
 \alias{summary.survBIV}
 \title{Summary methods for a survBIV object}
 \description{Provides results for an object of class \code{survBIV}. It gives the estimated bivariate distribution of the gap times and marginal distribution of the second gap time.}
-\usage{summary.survBIV(object, t1, t2, conf = FALSE, n.boot = 1000, conf.level = 0.95,
+\usage{
+\method{summary}{survBIV}(object, t1, t2, conf = FALSE, n.boot = 1000, conf.level = 0.95,
 method.boot = "percentile", method.cens = "KM", method = "all", ...)}
 
 \arguments{

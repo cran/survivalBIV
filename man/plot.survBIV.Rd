@@ -2,7 +2,8 @@
 \alias{plot.survBIV}
 \title{Plot methods for a survBIV object}
 \description{Provides the plots for the bivariate distribution function and marginal distribution of the second time.}
-\usage{plot.survBIV(x, plot.marginal = FALSE, plot.bivariate = FALSE, 
+\usage{
+\method{plot}{survBIV}(x, plot.marginal = FALSE, plot.bivariate = FALSE, 
 plot.persp = FALSE, plot.contour = FALSE, method, method.cens = "KM", xlab,
 ylab, zlab, main = method, col, grid.x = NULL, grid.y = NULL, col.biv = FALSE,
 xlim = NULL, ylim = NULL, ...)}

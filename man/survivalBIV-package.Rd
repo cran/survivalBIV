@@ -34,6 +34,8 @@ Lin D, Sun W, Ying Z (1999). "Nonparametric Estimation of the Time Distributions
 
 Meira Machado LF, Moreira A (2010). "Estimation of the Bivariate Distribution Function for Censored Gap Times". \emph{Proceedings of the 19th International Conference on Computational Statistics, pp. 1367-1374}.
 
+Moreira, A., Meira Machado, L. (2012). "survivalBIV: Estimation of the Bivariate Distribution Function for Sequentially Ordered Events Under Univariate Censoring". \emph{Journal of Statistical Software}, \bold{46(13)}, 1-16.
+
 Davison, A.C. and Hinkley, D.V. (1997) "Bootstrap Methods and Their Application", Chapter 5. Cambridge University Press.
 
 Johnson N, Kotz S (1972). "Distribution in statistics: continuous multivariate distribution", John Wiley and Sons.

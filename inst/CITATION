@@ -1,0 +1,20 @@
+citHeader("To cite survivalBIV in publications use:")
+
+citEntry(entry = "Article",
+  title        = "{survivalBIV}: Estimation of the Bivariate Distribution Function for Sequentially Ordered Events Under Univariate Censoring",
+  author       = personList(as.person("Ana Moreira"),
+                   as.person("Lu\\'{\\i}s Meira-Machado")),
+  journal      = "Journal of Statistical Software",
+  year         = "2012",
+  volume       = "46",
+  number       = "13",
+  pages        = "1--16",
+  url          = "http://www.jstatsoft.org/v46/i13/",
+
+  textVersion  =
+  paste("Ana Moreira, Luis Meira-Machado (2012).",
+        "survivalBIV: Estimation of the Bivariate Distribution Function for Sequentially Ordered Events Under Univariate Censoring.",
+        "Journal of Statistical Software, 46(13), 1-16.",
+        "URL http://www.jstatsoft.org/v46/i13/.")
+)
+

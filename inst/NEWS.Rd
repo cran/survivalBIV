@@ -2,6 +2,15 @@
 
 \title{NEWS file for the surivalBIV package}
 
+\section{Changes in version 1.3}{
+	\itemize{
+		\item The entries for S3 methods for plot.survBIV and summary.survBIV was changed.
+
+		\item Added a file CITATION
+		
+	}
+}
+
 \section{Changes in version 1.2}{
 	\itemize{
 		\item Implemented efficient algorithms for the computation of probability

@@ -1,4 +1,4 @@
-b33a49e151a6ae3e7b915c1ccf9332fa *DESCRIPTION
+fc982fcf36ca0c94223047c470972fed *DESCRIPTION
 f146e07e4276bca03957f0a45409382f *NAMESPACE
 dda6d84a49f35ebc1442006462fe3fbf *R/BivBoot.R
 0c201473ee4039c8cc76cdd0f685a8bb *R/BivCheck.R
@@ -17,7 +17,8 @@ bbdc6ac221c387f368b2bcc0c9724de6 *R/plot.survBIV.R
 8f18e63b121482b8a2c546e058ec5a31 *R/survBIV.R
 a5b18ef17e321b9625dec32e6b33325b *R/zzz.R
 7f3e401d4cb05751167041009048d485 *data/bladderBIV.rda
-a14f30134309807f93945f782d64fa88 *inst/NEWS.Rd
+67b98c54c87dbdc63d660e6b636502e4 *inst/CITATION
+55d5e9674cc29a02d48336e7a76f3834 *inst/NEWS.Rd
 9c47184ce03983ce2da08d0575dea75d *man/bivCKM.Rd
 5d2c4e82a3da53d21e62338b67d0be4f *man/bivIPCW.Rd
 b97c3584e447e9c3d08063099a50a68d *man/bivKMPW.Rd
@@ -25,10 +26,10 @@ b97c3584e447e9c3d08063099a50a68d *man/bivKMPW.Rd
 f702834e014a414af7df45c0f20e9000 *man/bladderBIV.Rd
 0c5263b967bd5e59b374480ce719ce72 *man/corrBIV.Rd
 290eccebf644af03d828e7690a258245 *man/dgpBIV.Rd
-6e4cdbfc35542f5ede18a87135024429 *man/plot.survBIV.Rd
-593f08859f564ce9c62628b28e3dad3f *man/summary.survBIV.Rd
+f7ac03077f9e72860825e9933155e12d *man/plot.survBIV.Rd
+bbb34ecc0e1926b90c8b626cfab8395e *man/summary.survBIV.Rd
 6c82230e607cd20a67bb3b6e8efec206 *man/survBIV.Rd
-d0892c4456edb8de4bfc97dc17a38276 *man/survivalBIV-package.Rd
+d2b1b942ecf6f16a8e7b19baa48f60dd *man/survivalBIV-package.Rd
 ffad2093efd2c8d5f4a255511ad07653 *src/BivCKM.c
 bbefd3b748461fc5df530473fa9ed0dc *src/BivIPCW.c
 9350487d12eb0815e71daeae271a305c *src/BivKMPW.c
